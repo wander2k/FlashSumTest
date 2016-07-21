@@ -1,14 +1,14 @@
-﻿var canvas_number1 = Raphael("number_1", 200, 300);
-var canvas_cal_method = Raphael("cal_method", 200, 300);
-var canvas_number2 = Raphael("number_2", 200, 300);
-var canvas_equal_sign = Raphael("equal_sign", 200, 300);
-var canvas_result = Raphael("result", 200, 300);
-var canvas_correct = Raphael("correct", 200, 300);
+﻿var canvas_number1 = Raphael("number_1", 100, 100);
+var canvas_cal_method = Raphael("cal_method", 100, 100);
+var canvas_number2 = Raphael("number_2", 100, 100);
+var canvas_equal_sign = Raphael("equal_sign", 100, 100);
+var canvas_result = Raphael("result", 100, 100);
+var canvas_correct = Raphael("correct", 100, 100);
 
-var canvas_selection_1 = Raphael("select_1", 200, 300);
-var canvas_selection_2 = Raphael("select_2", 200, 300);
-var canvas_selection_3 = Raphael("select_3", 200, 300);
-var canvas_selection_4 = Raphael("select_4", 200, 300);
+var canvas_selection_1 = Raphael("select_1", 100, 100);
+var canvas_selection_2 = Raphael("select_2", 100, 100);
+var canvas_selection_3 = Raphael("select_3", 100, 100);
+var canvas_selection_4 = Raphael("select_4", 100, 100);
 
 var selectionTexts = new Array();
 		
@@ -116,10 +116,9 @@ $(function(){
 	}
 	
 	function drawNumber1(val) {
-		//canvas_number1.rect(0, 0, 50, 100);
-		var text = canvas_number1.text(100, 100, val).attr({
+		var text = canvas_number1.text(50, 30, val).attr({
 			"fill": "#5a11ff", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -127,9 +126,9 @@ $(function(){
 	}
 	
 	function drawCalMethod(val) {
-		var text = canvas_cal_method.text(100, 100, val).attr({
+		var text = canvas_cal_method.text(50, 30, val).attr({
 			"fill": "#5aff11", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -138,9 +137,9 @@ $(function(){
 	
 	function drawNumber2(val) {
 		//canvas_number1.rect(0, 0, 50, 100);
-		var text = canvas_number2.text(100, 100, val).attr({
+		var text = canvas_number2.text(50, 30, val).attr({
 			"fill": "#5a11ff", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -149,9 +148,9 @@ $(function(){
 	
 
 	function drawEqualSign(val) {
-		var text = canvas_equal_sign.text(100, 100, val).attr({
+		var text = canvas_equal_sign.text(50, 30, val).attr({
 			"fill": "#5aff11", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -159,9 +158,9 @@ $(function(){
 	}
 	
 	function drawResult(val) {
-		var text = canvas_result.text(100, 100, val).attr({
+		var text = canvas_result.text(50, 30, val).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -169,9 +168,9 @@ $(function(){
 	}
 	
 	function drawCorrect(val) {
-		var text = canvas_correct.text(100, 100, val).attr({
+		var text = canvas_correct.text(50, 30, val).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
@@ -179,31 +178,31 @@ $(function(){
 	}	
 	
 	function drawSelections(selections) {
-		var text1 = canvas_selection_1.text(100, 100, selections[0]).attr({
+		var text1 = canvas_selection_1.text(50, 30, selections[0]).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
 		});		
 		
-		var text2 = canvas_selection_2.text(100, 100, selections[1]).attr({
+		var text2 = canvas_selection_2.text(50, 30, selections[1]).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
 		});		
-		var text3 = canvas_selection_3.text(100, 100, selections[2]).attr({
+		var text3 = canvas_selection_3.text(50, 30, selections[2]).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
 		});		
-		var text4 = canvas_selection_4.text(100, 100, selections[3]).attr({
+		var text4 = canvas_selection_4.text(50, 30, selections[3]).attr({
 			"fill": "#ff1111", //塗りつぶす色
-			"font-size": 150, //フォントサイズ
+			"font-size": 70, //フォントサイズ
 			"font-family": "Meiryo", //フォントファミリー
 			"font-weight": "bold", //フォントウェイト
 			"stroke": "none", //輪郭設定
