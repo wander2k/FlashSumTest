@@ -21,10 +21,12 @@ var testItems = new Array();
 
 $(function(){
 	var tmp = 1;
-	var testTimer;
+	var processTimer;
+	var drawTimer;
+	
 	initTestItems(itemLimit, sumLimit, timeLimit, resultShowTime);
-	console.log(testItems);
-	startTimer();
+	startProcessTimer();
+	startDrawTimer()
 	
 	$( ".selection" ).click(function() {
 		$(this).animate({
@@ -46,24 +48,28 @@ $(function(){
 		}
 	});	
 	
-	function clearAll() {
-		canvas_number1.clear();
-		canvas_cal_method.clear();
-		canvas_number2.clear();
-		canvas_equal_sign.clear();
-		canvas_result.clear();
-		canvas_correct.clear();
-
-		canvas_selection_1.clear();
-		canvas_selection_2.clear();
-		canvas_selection_3.clear();
-		canvas_selection_4.clear();
+	function startProcessTimer(){
+		processTimer=setInterval(function(){
+			doIntervalAction();
+		} , 1000);
 	}
+	function stopProcessTimer(){
+		clearInterval(processTimer);
+	}
+	
+	function startDrawTimer(){
+		drawTimer=setInterval(function(){
+			doDrawAction();
+		} , 100);
+	}
+	function stopDrawTimer(){
+		clearInterval(drawTimer);
+	}	
 	
 	function processAll() {
 		if (testItems == null || testItems.length <=0 ) {
 			console.log("stop:" + testItems.length);
-			stopTimer();
+			stopProcessTimer();
 			return;
 		}
 		var item = testItems[0];
@@ -91,18 +97,13 @@ $(function(){
 	}
 	
 	function doIntervalAction() {
-		drawAll(testItems[0]);
 		processAll();
-		console.log(testItems.length);
 	};
-	function startTimer(){
-		testTimer=setInterval(function(){
-			doIntervalAction();
-		} , 1000);
-	}
-	function stopTimer(){
-		clearInterval(testTimer);
-	}
+	
+	function doDrawAction() {
+		drawAll(testItems[0]);
+	};
+	
 	
 	function initTestItems(itemNumber, sumLimit, timeLimit, resultShowTime) {
 		for (var i=0;i<itemNumber;i++) {
@@ -114,6 +115,8 @@ $(function(){
 			testItems[i] = item;
 		}
 	}
+	
+	/********Draw engine starts********************/
 	
 	function drawNumber1(val) {
 		var text = canvas_number1.text(50, 30, val).attr({
@@ -231,7 +234,28 @@ $(function(){
 		$("#item_left").text( finishedCount + "/" + itemLimit);
 	}
 	
+	function clearAll() {
+		canvas_number1.clear();
+		canvas_cal_method.clear();
+		canvas_number2.clear();
+		canvas_equal_sign.clear();
+		canvas_result.clear();
+		canvas_correct.clear();
+
+		canvas_selection_1.clear();
+		canvas_selection_2.clear();
+		canvas_selection_3.clear();
+		canvas_selection_4.clear();
+	}
+	
+	
 	function drawAll(item) {	
+		if (testItems == null || testItems.length <=0 ) {
+			console.log("stop:" + testItems.length);
+			stopDrawTimer();
+			return;
+		}
+		
 		clearAll();
 		
 		drawNumber1(item.number1);
