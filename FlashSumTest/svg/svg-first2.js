@@ -39,11 +39,12 @@ $(function(){
 			testItems[0].selected = selectedValue;
 			testItems[0].timeLeft = 0;
 			
-			if (selectedValue == testItems[0].sum) {
-				testItems[0].correct = "〇";
+			testItems[0].correct = testItems[0].sum;
+			if (selectedValue == testItems[0].correct) {
+				testItems[0].selected = "〇";
 				correctedItemNumber = correctedItemNumber + 1;
 			} else {
-				testItems[0].correct = "×";
+				testItems[0].selected = "×";
 			}
 		}
 	});	
@@ -95,10 +96,7 @@ $(function(){
 		if (item.timeLeft > 0) {
 			item.timeLeft = item.timeLeft - 1;
 		} else {
-			if (item.selected != item.sum) {
-				item.correct = "×";
-				item.selected = item.sum;
-			}
+			item.correct = item.sum;
 			item.selections[0] = "-";
 			item.selections[1] = "-";
 			item.selections[2] = "-";
@@ -133,36 +131,97 @@ $(function(){
 	/********Draw engine starts********************/
 	
 	function drawNumber1(val) {
-		//canvas_number1.clear();
-		$("#number_1").text(val);
+		var text = canvas_number1.text(50, 30, val).attr({
+			"fill": "#5a11ff", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 	function drawCalMethod(val) {
-		$("#cal_method").text(val);
+		var text = canvas_cal_method.text(50, 30, val).attr({
+			"fill": "#5aff11", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 	function drawNumber2(val) {
-		$("#number_2").text(val);
+		//canvas_number1.rect(0, 0, 50, 100);
+		var text = canvas_number2.text(50, 30, val).attr({
+			"fill": "#5a11ff", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 
 	function drawEqualSign(val) {
-		$("#equal_sign").text(val);
+		var text = canvas_equal_sign.text(50, 30, val).attr({
+			"fill": "#5aff11", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 	function drawResult(val) {
-		$("#result").text(val);
+		var text = canvas_result.text(50, 30, val).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 	function drawCorrect(val) {
-		$("#correct").text(val);
+		var text = canvas_correct.text(50, 30, val).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}	
 	
 	function drawSelections(selections) {
-		$("#select_1").text(selections[0]);
-		$("#select_2").text(selections[1]);
-		$("#select_3").text(selections[2]);
-		$("#select_4").text(selections[3]);
+		var text1 = canvas_selection_1.text(50, 30, selections[0]).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
+		
+		var text2 = canvas_selection_2.text(50, 30, selections[1]).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
+		var text3 = canvas_selection_3.text(50, 30, selections[2]).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
+		var text4 = canvas_selection_4.text(50, 30, selections[3]).attr({
+			"fill": "#ff1111", //塗りつぶす色
+			"font-size": 70, //フォントサイズ
+			"font-family": "Meiryo", //フォントファミリー
+			"font-weight": "bold", //フォントウェイト
+			"stroke": "none", //輪郭設定
+		});		
 	}
 	
 	function initSelection(correctNumber, sumLimit) {
@@ -183,18 +242,29 @@ $(function(){
 	
 	function drawFinshedItem() {
 		var leftCount = testItems.length;
-		var finishedCount = itemLimit - leftCount + 1;
+		var finishedCount = itemLimit - leftCount;
 		$("#item_left").text( finishedCount + "/" + itemLimit);
 	}
 	
 	function clearAll() {
+		canvas_number1.clear();
+		canvas_cal_method.clear();
+		canvas_number2.clear();
+		canvas_equal_sign.clear();
+		canvas_result.clear();
+		canvas_correct.clear();
+
+		canvas_selection_1.clear();
+		canvas_selection_2.clear();
+		canvas_selection_3.clear();
+		canvas_selection_4.clear();
 	}
 	
 	
 	function drawAll(item) {	
 		if (testItems == null || testItems.length <=0 ) {
 			console.log("stop:" + testItems.length);
-			stopDrawTimer(); 
+			stopDrawTimer();
 			return;
 		}
 		

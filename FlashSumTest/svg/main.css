@@ -48,5 +48,59 @@ html, body, .container-fluid {
 }
 
 .selection {
+	margin: 0px;
+	padding:5px;	
+	outline: 0px solid ;
+    vertical-align: middle;
+    text-align: center;
+	color: #0080ff; /*塗りつぶす色*/
+	font-size : 50pt ; /*フォントサイズ*/
+	font-family: Meiryo; /*フォントファミリー*/
+	font-weight: bold; /*フォントウェイト*/
+	
+}
+
+.number {
+	margin:0px;
+	padding: 0px;	
     outline: 0px solid ;
+    vertical-align: middle;
+    text-align: center;
+	color: #ff1111 ; /*塗りつぶす色*/
+	font-size : 60pt ; /*フォントサイズ*/
+	font-family: Meiryo; /*フォントファミリー*/
+	font-weight: bold; /*フォントウェイト*/
+	height: 100%;
+	background-color: activecaption;
+}
+
+.sign {
+	margin:0px;
+	padding: 5px;	
+	outline: 0px solid ;
+    vertical-align: middle;
+    text-align: center;
+	color: #400000 ; /*塗りつぶす色*/
+	font-size : 60pt ; /*フォントサイズ*/
+	font-family: Meiryo; /*フォントファミリー*/
+	font-weight: bold; /*フォントウェイト*/
+	height: 100%;
+}
+
+.judge {
+    outline: 0px solid ;
+    vertical-align: middle;
+    text-align: center;
+	color: #ff1111 ; /*塗りつぶす色*/
+	font-size : 60pt ; /*フォントサイズ*/
+	font-family: Meiryo; /*フォントファミリー*/
+	font-weight: bold; /*フォントウェイト*/
+}
+
+.btn {
+	background: #09C;
+	border: 1px solid #DDD;
+	color: #FFF;
+	text-shadow: 2px 2px 1px rgba(0,0,0,0.5);
+	padding: 10px;
 }
