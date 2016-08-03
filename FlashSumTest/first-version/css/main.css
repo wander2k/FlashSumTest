@@ -54,7 +54,7 @@ html, body, .container-fluid {
     vertical-align: middle;
     text-align: center;
 	color: #0080ff; /*塗りつぶす色*/
-	font-size : 50pt ; /*フォントサイズ*/
+	font-size : 40pt ; /*フォントサイズ*/
 	font-family: Meiryo; /*フォントファミリー*/
 	font-weight: bold; /*フォントウェイト*/
 	
@@ -67,7 +67,7 @@ html, body, .container-fluid {
     vertical-align: middle;
     text-align: center;
 	color: #ff1111 ; /*塗りつぶす色*/
-	font-size : 60pt ; /*フォントサイズ*/
+	font-size : 40pt ; /*フォントサイズ*/
 	font-family: Meiryo; /*フォントファミリー*/
 	font-weight: bold; /*フォントウェイト*/
 	height: 100%;
@@ -81,7 +81,7 @@ html, body, .container-fluid {
     vertical-align: middle;
     text-align: center;
 	color: #400000 ; /*塗りつぶす色*/
-	font-size : 60pt ; /*フォントサイズ*/
+	font-size : 40pt ; /*フォントサイズ*/
 	font-family: Meiryo; /*フォントファミリー*/
 	font-weight: bold; /*フォントウェイト*/
 	height: 100%;
@@ -92,7 +92,7 @@ html, body, .container-fluid {
     vertical-align: middle;
     text-align: center;
 	color: #ff1111 ; /*塗りつぶす色*/
-	font-size : 60pt ; /*フォントサイズ*/
+	font-size : 40pt ; /*フォントサイズ*/
 	font-family: Meiryo; /*フォントファミリー*/
 	font-weight: bold; /*フォントウェイト*/
 }

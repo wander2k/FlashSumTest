@@ -1,29 +1,23 @@
-﻿//var canvas_number1 = Raphael("number_1", 100, 100);
-//var canvas_cal_method = Raphael("cal_method", 100, 100);
-//var canvas_number2 = Raphael("number_2", 100, 100);
-//var canvas_equal_sign = Raphael("equal_sign", 100, 100);
-//var canvas_result = Raphael("result", 100, 100);
-//var canvas_correct = Raphael("correct", 100, 100);
-//
-//var canvas_selection_1 = Raphael("select_1", 100, 100);
-//var canvas_selection_2 = Raphael("select_2", 100, 100);
-//var canvas_selection_3 = Raphael("select_3", 100, 100);
-//var canvas_selection_4 = Raphael("select_4", 100, 100);
-
-
-$(function() {
-	var selectionTexts = new Array();
-
+﻿$(function() {
+	// 計算合計値の最大値
 	var sumLimit = 20;
+	// 答え時間　秒
 	var timeLimit = 5;
+	// 設問数
 	var itemLimit = 10;
+	// 正解数
 	var correctedItemNumber = 0;
+	// 結果表示時間　秒
 	var resultShowTime = 2;
+	// 設問配列
 	var testItems = new Array();
 	
+	// 処理タイマー
 	var processTimer;
+	// 表示処理タイマー
 	var drawTimer;
 	
+	// 回答中設問Index
 	var currentItemIndex = 0;
 
 	initTestItems(itemLimit, sumLimit, timeLimit, resultShowTime);
@@ -32,34 +26,11 @@ $(function() {
 
 	$(".rippler").rippler({
 		effectClass : 'rippler-effect',
-		effectSize : 32 // Default size (width & height)
+		effectSize : 50 // Default size (width & height)
 		,
 		addElement : 'div' // e.g. 'svg'(feature)
 		,
 		duration : 200
-	});
-
-	$(".selection").click(function() {
-		// $(this).animate({
-		// backgroundColor: "#aa0000",
-		// color: "#fff"
-		// }, 500);
-		//var selected = $(this).data("selected");
-		//var selectedValue = testItems[0].selections[selected];
-		var item = testItems[currentItemIndex];
-		var selectedValue = $(this).text();
-		if (selectedValue != "-") {
-			item.selected = selectedValue;
-			item.timeLeft = 0;
-
-			if (selectedValue == item.sum) {
-				item.correct = "〇";
-				correctedItemNumber = correctedItemNumber + 1;
-			} else {
-				item.correct = "×";
-			}
-			testItems[currentItemIndex] = item;
-		}
 	});
 
 	function startProcessTimer() {
@@ -80,8 +51,27 @@ $(function() {
 		clearInterval(drawTimer);
 	}
 
+	$(".selection").mousedown(function() {
+		var item = testItems[currentItemIndex];
+		var selectedValue = $(this).text();
+		$("#debug").text("clicked:" + selectedValue);
+		if (selectedValue != "-") {
+			item.selected = selectedValue;
+			item.timeLeft = 0;
+
+			if (selectedValue == item.sum) {
+				item.correct = "〇";
+			} else {
+				item.correct = "×";
+			}
+		}
+	});
+
+	
+	/********Process engine starts********************/
+	
 	function processAll() {
-		//if (testItems == null || testItems.length <= 0) {
+		// ゲーム終了か
 		if (currentItemIndex >= itemLimit) {
 			console.log("stop:" + testItems.length);
 			stopProcessTimer();
@@ -89,7 +79,7 @@ $(function() {
 			if (correctedItemNumber != itemLimit) {
 				setTimeout(function() {
 					window.location.href = 'fail.html';
-				}, 2000);
+				}, 1000);
 			} else {
 				setTimeout(function() {
 					window.location.href = 'success.html';
@@ -99,18 +89,19 @@ $(function() {
 			return;
 		}
 		var item = testItems[currentItemIndex];
+		// 次のItemへ進む
 		if (item.timeLeft <= 0 && item.resultShowTime <= 0) {
-			console.log("shift!!");
 			currentItemIndex = currentItemIndex + 1;
+			console.log("Shift to next :" + currentItemIndex);
 			return;
 		}
 
+		// 答え時間が残るか
 		if (item.timeLeft > 0) {
 			item.timeLeft = item.timeLeft - 1;
 		} else {
-			if (item.selected != item.sum) {
+			if (item.selected == "?") {
 				item.correct = "×";
-				item.selected = item.sum;
 			}
 			item.selections[0] = "-";
 			item.selections[1] = "-";
@@ -127,8 +118,18 @@ $(function() {
 
 	function doDrawAction() {
 		drawAll(testItems[currentItemIndex]);
-	}
-	;
+	};
+	
+	function initSelection(correctNumber, sumLimit) {
+		var selections = new Array();
+		selections[0] = correctNumber;
+		selections[1] = Math.ceil(Math.random() * sumLimit);
+		selections[2] = Math.ceil(Math.random() * sumLimit);
+		selections[3] = Math.ceil(Math.random() * sumLimit);
+		selections.sort();
+
+		return selections;
+	};	
 
 	function initTestItems(itemNumber, sumLimit, timeLimit, resultShowTime) {
 		for (var i = 0; i < itemNumber; i++) {
@@ -148,11 +149,11 @@ $(function() {
 			testItems[i] = item;
 		}
 	}
+	
 
-	/** ******Draw engine starts******************* */
+	/********Draw engine starts********************/
 
 	function drawNumber1(val) {
-		// canvas_number1.clear();
 		$("#number_1").text(val);
 	}
 
@@ -183,17 +184,6 @@ $(function() {
 		$("#select_4").text(selections[3]);
 	}
 
-	function initSelection(correctNumber, sumLimit) {
-		var selections = new Array();
-		selections[0] = correctNumber;
-		selections[1] = Math.ceil(Math.random() * sumLimit);
-		selections[2] = Math.ceil(Math.random() * sumLimit);
-		selections[3] = Math.ceil(Math.random() * sumLimit);
-		selections.sort();
-
-		return selections;
-	}
-
 	function drawLeftTime(timeLeft, total) {
 		var leftPercent = timeLeft / total * 100;
 		$("#progress").css({
@@ -202,22 +192,11 @@ $(function() {
 	}
 
 	function drawFinshedItem() {
-		var leftCount = testItems.length;
-		var finishedCount = itemLimit - leftCount + 1;
-		$("#item_left").text(finishedCount + "/" + itemLimit);
-	}
-
-	function clearAll() {
+		var finished = currentItemIndex + 1;
+		$("#item_left").text(finished + "/" + itemLimit);
 	}
 
 	function drawAll(item) {
-		if (currentItemIndex >= testItems.length) {
-			stopDrawTimer();
-			return;
-		}
-
-		clearAll();
-
 		drawNumber1(item.number1);
 		drawCalMethod("+");
 		drawNumber2(item.number2);
@@ -228,5 +207,10 @@ $(function() {
 
 		drawLeftTime(item.timeLeft, timeLimit);
 		drawFinshedItem();
+		
+		if (currentItemIndex >= testItems.length) {
+			stopDrawTimer();
+			return;
+		}
 	}
 });
